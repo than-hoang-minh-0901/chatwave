@@ -25,10 +25,28 @@ input{font:inherit;outline:none}.search{width:100%;border:1px solid #e6e9f0;back
 </div></main>
 <script>
 const initial=[
-{id:1,name:"Alex Morgan",color:"#6875d8",online:true,msgs:[["them","Hey! How are you?","09:40"],["me","Doing great! How about you?","09:41"],["them","Pretty good. What are you up to today?","09:42"]]},
-{id:2,name:"Sophia Lee",color:"#d16b9c",online:true,msgs:[["them","We should go on an adventure this weekend!","Yesterday"],["me","That sounds like a plan!","Yesterday"]]},
-{id:3,name:"Daniel Kim",color:"#269b8a",online:false,msgs:[["them","See you tomorrow!","Monday"]]},
-{id:4,name:"Emma Wilson",color:"#d18b45",online:true,msgs:[["them","Thank you so much!","Sunday"]]}
+
+const initial=[
+  {id:1,name:"Alex Morgan",color:"#6875d8",online:true,msgs:[]},
+  {id:2,name:"Sophia Lee",color:"#d16b9c",online:true,msgs:[]},
+  {id:3,name:"Daniel Kim",color:"#269b8a",online:false,msgs:[]},
+  {id:4,name:"Emma Wilson",color:"#d18b45",online:true,msgs:[]}
+];
+
+const RESET_KEY="chatwave-demo-cleared-v1";
+
+if(!localStorage.getItem(RESET_KEY)){
+  localStorage.removeItem("chatwave-chats");
+  localStorage.setItem(RESET_KEY,"yes");
+}
+
+let chats;
+try {
+  chats=JSON.parse(localStorage.getItem("chatwave-chats"))||initial;
+} catch {
+  chats=initial;
+}
+
 ];
 let chats;try{chats=JSON.parse(localStorage.getItem("chatwave-chats"))||initial}catch{chats=initial}
 let selected=1;const $=id=>document.getElementById(id);
